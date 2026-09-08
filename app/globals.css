@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-poppins: "Poppins", sans-serif;
+    --font-inter: "Inter", sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-base-gray text-navy antialiased;
+    font-family: var(--font-inter);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-poppins);
+    @apply text-navy;
+  }
+
+  ::selection {
+    background-color: #9b1b7d;
+    color: #ffffff;
+  }
+}
+
+@layer components {
+  .container-ta {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Boton primario / CTA en magenta */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-magenta px-6 py-3
+      text-sm font-semibold uppercase tracking-wide text-white shadow-cta
+      transition-all duration-200 hover:bg-magenta-600 hover:-translate-y-0.5
+      focus:outline-none focus:ring-4 focus:ring-magenta-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-navy
+      bg-white px-6 py-3 text-sm font-semibold uppercase tracking-wide text-navy
+      transition-all duration-200 hover:bg-navy hover:text-white focus:outline-none
+      focus:ring-4 focus:ring-navy-100;
+  }
+
+  .btn-whatsapp {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3
+      text-sm font-semibold text-white shadow-soft transition-all duration-200
+      hover:brightness-105 hover:-translate-y-0.5;
+  }
+
+  /* Badge base */
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold
+      uppercase tracking-wide;
+  }
+
+  .badge-stock {
+    @apply badge bg-cyan-200 text-cyan-800;
+  }
+
+  .badge-promo {
+    @apply badge bg-blush-200 text-blush-700;
+  }
+
+  .badge-magenta {
+    @apply badge bg-magenta-100 text-magenta-700;
+  }
+
+  /* Tarjeta neomorfica soft */
+  .card-soft {
+    @apply rounded-2xl border border-periwinkle-100 bg-white shadow-soft transition-all
+      duration-200 hover:-translate-y-1 hover:shadow-soft-lg;
+  }
+
+  .section-label {
+    @apply text-sm font-semibold uppercase tracking-[0.2em] text-magenta;
+  }
+
+  /* Textura de puntos armonica (para fondos oscuros) */
+  .bg-dots {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1.4px);
+    background-size: 22px 22px;
+  }
+}
