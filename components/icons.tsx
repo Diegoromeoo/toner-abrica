@@ -121,6 +121,18 @@ export function LocationIcon(props: IconProps) {
   );
 }
 
+// Cookie: galleta con mordidas y chispas
+export function CookieIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M21 12.5A8.5 8.5 0 1 1 11.5 3c-.3 1.4.7 2.7 2.1 2.7a2.1 2.1 0 0 0 2.1-2.1c1.9 1 3.3 2.8 3.8 4.9a2 2 0 0 0-2 2 2 2 0 0 0 2 2c.3 0 .6 0 .9-.1.4.3.6.7.6 1.1Z" />
+      <circle cx="9" cy="10" r="1" fill="currentColor" stroke="none" />
+      <circle cx="8.5" cy="15" r="1" fill="currentColor" stroke="none" />
+      <circle cx="13" cy="16.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 export function ClockIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>

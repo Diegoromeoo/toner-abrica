@@ -38,7 +38,9 @@ export function Stats() {
             <Reveal
               key={s.label}
               delay={i * 120}
-              className="rounded-2xl border border-periwinkle-700/60 bg-white/5 p-6 text-center backdrop-blur-sm"
+              className="group rounded-2xl border border-periwinkle-700/60 bg-white/5 p-6 text-center shadow-navycard
+                backdrop-blur-sm transition-all duration-300 ease-luxe hover:-translate-y-1 hover:border-cyan-300/40
+                hover:bg-white/[0.08]"
             >
               <div className="font-display text-4xl font-extrabold text-cyan-300 sm:text-5xl">
                 <CountUp end={s.end} prefix={s.prefix} suffix={s.suffix} separator={s.separator} />

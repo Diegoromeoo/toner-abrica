@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { CookieConsent } from "@/components/CookieConsent";
 import { site } from "@/lib/site";
 
 const poppins = Poppins({
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main>{children}</main>
         <Footer />
         <WhatsAppButton />
+        <CookieConsent />
       </body>
     </html>
   );

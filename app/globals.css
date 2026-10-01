@@ -10,11 +10,13 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-base-gray text-navy antialiased;
     font-family: var(--font-inter);
+    overflow-x: hidden;
   }
 
   h1,
@@ -29,6 +31,17 @@
     background-color: #9b1b7d;
     color: #ffffff;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
 @layer components {
@@ -38,23 +51,67 @@
 
   /* Boton primario / CTA en magenta */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-magenta px-6 py-3
-      text-sm font-semibold uppercase tracking-wide text-white shadow-cta
-      transition-all duration-200 hover:bg-magenta-600 hover:-translate-y-0.5
-      focus:outline-none focus:ring-4 focus:ring-magenta-200;
+    @apply relative isolate inline-flex items-center justify-center gap-2 overflow-hidden
+      rounded-full bg-magenta px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white
+      shadow-cta transition-all duration-300 ease-luxe hover:-translate-y-0.5 hover:bg-magenta-600
+      hover:shadow-glow focus:outline-none focus:ring-4 focus:ring-magenta-200 active:translate-y-0;
   }
 
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-navy
-      bg-white px-6 py-3 text-sm font-semibold uppercase tracking-wide text-navy
-      transition-all duration-200 hover:bg-navy hover:text-white focus:outline-none
-      focus:ring-4 focus:ring-navy-100;
+      bg-white px-6 py-3 text-sm font-semibold uppercase tracking-wide text-navy shadow-soft
+      transition-all duration-300 ease-luxe hover:-translate-y-0.5 hover:bg-navy hover:text-white
+      hover:shadow-soft-lg focus:outline-none focus:ring-4 focus:ring-navy-100 active:translate-y-0;
   }
 
   .btn-whatsapp {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3
-      text-sm font-semibold text-white shadow-soft transition-all duration-200
-      hover:brightness-105 hover:-translate-y-0.5;
+    @apply relative isolate inline-flex items-center justify-center gap-2 overflow-hidden
+      rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-soft
+      transition-all duration-300 ease-luxe hover:-translate-y-0.5 hover:shadow-elevate
+      hover:brightness-105 active:translate-y-0;
+  }
+
+  /* Barrido de luz diagonal: motion de lujo en los CTAs principales */
+  .btn-primary::after,
+  .btn-whatsapp::after {
+    content: "";
+    position: absolute;
+    inset: -30% auto -30% 0;
+    width: 32%;
+    z-index: 1;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transform: translateX(-160%) skewX(-18deg);
+    animation: shine 5.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    animation-delay: var(--shine-delay, 1.1s);
+    pointer-events: none;
+  }
+  .btn-primary > *,
+  .btn-whatsapp > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Version reutilizable del barrido de luz para otros CTAs (ej. CTASection) */
+  .shine {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .shine::after {
+    content: "";
+    position: absolute;
+    inset: -30% auto -30% 0;
+    width: 32%;
+    z-index: 1;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    transform: translateX(-160%) skewX(-18deg);
+    animation: shine 5.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    animation-delay: var(--shine-delay, 1.1s);
+    pointer-events: none;
+  }
+  .shine > * {
+    position: relative;
+    z-index: 2;
   }
 
   /* Badge base */
@@ -78,7 +135,7 @@
   /* Tarjeta neomorfica soft */
   .card-soft {
     @apply rounded-2xl border border-periwinkle-100 bg-white shadow-soft transition-all
-      duration-200 hover:-translate-y-1 hover:shadow-soft-lg;
+      duration-300 ease-luxe hover:-translate-y-1.5 hover:shadow-elevate;
   }
 
   .section-label {

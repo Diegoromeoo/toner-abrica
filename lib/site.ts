@@ -7,8 +7,21 @@ export const site = {
   description:
     "E-commerce y catalogo corporativo B2B de toner, impresoras, plotters, consumibles, papeleria y hardware. Envio local en Guadalajara y a todo Mexico.",
   city: "Guadalajara, Jalisco",
-  address: "Alamo Industrial, Guadalajara, Jalisco",
-  zone: "Alamo Industrial",
+  locations: {
+    taller: {
+      label: "Taller",
+      street: "Calle Tuerca 2175",
+      postalCode: "44490",
+      city: "Guadalajara, Jalisco",
+    },
+    local: {
+      label: "Local",
+      street: "Calle Galeana 279",
+      neighborhood: "Zona Centro",
+      postalCode: "44100",
+      city: "Guadalajara, Jalisco",
+    },
+  },
   // ---- Contactos vacios por el momento ----
   // Numero de WhatsApp en formato internacional sin signos, ej. "523312345678".
   whatsapp: "",

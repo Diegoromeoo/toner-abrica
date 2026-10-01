@@ -38,8 +38,8 @@ export function Reveal({ children, delay = 0, className = "", as = "div" }: Reve
   return (
     <Tag
       ref={ref}
-      className={`transition-all duration-700 ease-out ${
-        visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+      className={`transition-all duration-[850ms] ease-luxe ${
+        visible ? "translate-y-0 scale-100 opacity-100" : "translate-y-7 scale-[0.975] opacity-0"
       } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >

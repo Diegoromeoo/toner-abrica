@@ -38,9 +38,9 @@ export function CategoryPillars() {
               <Reveal key={pillar.id} delay={i * 100} className="h-full">
                 <a
                   href="#catalogo"
-                  className={`group card-soft flex h-full flex-col p-6 ${accentRing[pillar.accent]}`}
+                  className={`group card-soft flex h-full flex-col p-6 hover:scale-[1.015] ${accentRing[pillar.accent]}`}
                 >
-                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-base-gray text-navy shadow-neu-inset transition group-hover:bg-white">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-base-gray text-navy shadow-neu-inset transition-all duration-300 ease-luxe group-hover:scale-110 group-hover:bg-white">
                     <Icon className="h-7 w-7" />
                   </span>
                   <h3 className="mt-5 text-xl font-bold">{pillar.title}</h3>

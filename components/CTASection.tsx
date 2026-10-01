@@ -25,9 +25,10 @@ export function CTASection() {
                 href={whatsappUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3
-                  text-sm font-semibold uppercase tracking-wide text-magenta transition hover:bg-cyan-50
-                  hover:-translate-y-0.5"
+                className="shine relative isolate inline-flex items-center justify-center gap-2 overflow-hidden
+                  rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-wide text-magenta
+                  shadow-soft transition-all duration-300 ease-luxe hover:-translate-y-0.5 hover:bg-cyan-50
+                  hover:shadow-elevate"
               >
                 <WhatsAppIcon className="h-4 w-4" />
                 Cotizar por WhatsApp
@@ -36,8 +37,8 @@ export function CTASection() {
                 <a
                   href={`mailto:${site.email}`}
                   className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/70
-                    px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition
-                    hover:bg-white/10"
+                    px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition-all
+                    duration-300 ease-luxe hover:-translate-y-0.5 hover:bg-white/10"
                 >
                   <MailIcon className="h-4 w-4" />
                   Enviar por correo

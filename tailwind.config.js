@@ -1,14 +1,16 @@
-import type { Config } from "tailwindcss";
+const path = require("path");
+
+/** @type {import('tailwindcss').Config} */
 
 /**
  * Toner Abrica — Design tokens
  * Estilo: Corporate Modern / Flat Design con toques neomorficos soft.
  */
-const config: Config = {
+const config = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
+    path.join(__dirname, "app/**/*.{js,ts,jsx,tsx,mdx}"),
+    path.join(__dirname, "components/**/*.{js,ts,jsx,tsx,mdx}"),
+    path.join(__dirname, "lib/**/*.{js,ts,jsx,tsx,mdx}"),
   ],
   theme: {
     extend: {
@@ -101,6 +103,13 @@ const config: Config = {
         "neu-inset":
           "inset 4px 4px 10px rgba(16, 24, 70, 0.06), inset -4px -4px 10px rgba(255, 255, 255, 0.9)",
         cta: "0 8px 24px -6px rgba(155, 27, 125, 0.45)",
+        // Elevacion premium (hover de tarjetas sobre fondo claro)
+        elevate: "0 24px 48px -16px rgba(16, 24, 70, 0.22), 0 4px 12px -4px rgba(16, 24, 70, 0.1)",
+        // Resplandor magenta (CTAs destacados)
+        glow: "0 0 0 1px rgba(155, 27, 125, 0.12), 0 12px 32px -8px rgba(155, 27, 125, 0.35)",
+        // Tarjetas sobre fondo navy (stats, footer)
+        navycard: "0 16px 36px -14px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06)",
+        header: "0 8px 30px -12px rgba(16, 24, 70, 0.18)",
       },
       borderRadius: {
         xl: "1rem",
@@ -126,15 +135,24 @@ const config: Config = {
           "0%": { opacity: "0", transform: "translateY(16px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        shine: {
+          "0%": { transform: "translateX(-160%) skewX(-18deg)" },
+          "45%, 100%": { transform: "translateX(330%) skewX(-18deg)" },
+        },
       },
       animation: {
         marquee: "marquee 28s linear infinite",
         float: "float 6s ease-in-out infinite",
         "fade-up": "fade-up 0.6s ease-out both",
+        shine: "shine 5.5s cubic-bezier(0.22, 1, 0.36, 1) infinite",
+      },
+      transitionTimingFunction: {
+        // Curva de desaceleracion premium (entradas, hovers de tarjetas)
+        luxe: "cubic-bezier(0.22, 1, 0.36, 1)",
       },
     },
   },
   plugins: [],
 };
 
-export default config;
+module.exports = config;

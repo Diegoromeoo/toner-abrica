@@ -33,11 +33,19 @@ const features: Feature[] = [
 
 export function Features() {
   return (
-    <section className="bg-white py-12">
-      <div className="container-ta grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <section className="bg-white py-14 sm:py-16">
+      <div className="container-ta grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {features.map((f, i) => (
-          <Reveal key={f.title} delay={i * 100} className="flex items-start gap-4">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-100 text-cyan-700">
+          <Reveal
+            key={f.title}
+            delay={i * 100}
+            className="group flex items-start gap-4 rounded-2xl border border-periwinkle-100 bg-white p-5
+              shadow-soft transition-all duration-300 ease-luxe hover:-translate-y-1 hover:shadow-elevate"
+          >
+            <span
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-100
+                text-cyan-700 shadow-neu-inset transition-colors duration-300 group-hover:bg-cyan-200"
+            >
               <f.icon className="h-6 w-6" />
             </span>
             <div>

@@ -10,7 +10,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-periwinkle-100 bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-50 w-full border-b border-periwinkle-100 bg-white/95 shadow-header backdrop-blur">
       <div className="container-ta">
         {/* Fila 1: logo + buscador + CTA */}
         <div className="flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">

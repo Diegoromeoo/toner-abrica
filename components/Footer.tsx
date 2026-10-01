@@ -29,7 +29,13 @@ export function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-2 text-xs">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-periwinkle-700/70 bg-white/5 px-3 py-1.5">
               <LocationIcon className="h-3.5 w-3.5 text-cyan-300" />
-              {site.address}
+              <span className="font-semibold text-cyan-200">Taller</span>
+              {site.locations.taller.street}, C.P. {site.locations.taller.postalCode}
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-periwinkle-700/70 bg-white/5 px-3 py-1.5">
+              <LocationIcon className="h-3.5 w-3.5 text-cyan-300" />
+              <span className="font-semibold text-cyan-200">Local</span>
+              {site.locations.local.street}, {site.locations.local.neighborhood}, C.P. {site.locations.local.postalCode}
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-periwinkle-700/70 bg-white/5 px-3 py-1.5">
               <TruckIcon className="h-3.5 w-3.5 text-cyan-300" />
