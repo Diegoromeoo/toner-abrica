@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRightIcon, WhatsAppIcon, LocationIcon } from "./icons";
 import { whatsappUrl } from "@/lib/site";
 import { Magnetic } from "./Magnetic";
@@ -22,9 +22,8 @@ const item = {
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : 70]);
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 70]);
   // El scroll inicial del target no se conoce hasta montar: forzamos 0 en el primer
   // render de cliente (igual que en el servidor) para que la hidratacion coincida,
   // y activamos el parallax real justo despues.
@@ -46,7 +45,7 @@ export function Hero() {
         <motion.div
           className="absolute inset-0 bg-cover bg-right bg-no-repeat"
           style={{ backgroundImage: "url('/hero-sky.jpg')", filter: "blur(14px)" }}
-          animate={reduced ? { scale: 1.12 } : { scale: [1.12, 1.22, 1.12] }}
+          animate={{ scale: [1.12, 1.22, 1.12] }}
           transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
         />
       </motion.div>

@@ -1,23 +1,31 @@
 import { Reveal } from "./Reveal";
 import { TruckIcon, ShieldIcon, CheckIcon } from "./icons";
 
-/** Coordenadas en el espacio de la imagen mexico.png (857 x 1109) */
-const HUB = { x: 330, y: 615 };
+/**
+ * Coordenadas en el espacio de mexico.png, recortada a su silueta real
+ * (693 x 500 — antes tenia un margen blanco enorme de 857 x 1109 que dejaba
+ * al mapa chico y con "bordes" vacios). Las posiciones se calcularon
+ * proyectando lat/long reales de cada ciudad con una transformacion lineal
+ * calibrada contra dos puntos verificables de la silueta (la punta de Baja
+ * California en Tijuana y la punta de la peninsula de Yucatan), asi que
+ * coinciden con la geografia real de Mexico en vez de ser al ojo.
+ */
+const HUB = { x: 362, y: 317 };
 
 const cities = [
-  { name: "Tijuana", x: 96, y: 315, anchor: "start" as const },
-  { name: "Monterrey", x: 495, y: 398, anchor: "start" as const },
-  { name: "CDMX", x: 452, y: 668, anchor: "start" as const },
-  { name: "Cancun", x: 805, y: 598, anchor: "end" as const },
-  { name: "Oaxaca", x: 478, y: 766, anchor: "middle" as const },
+  { name: "Tijuana", x: 100, y: 11, anchor: "start" as const, labelDy: 22 },
+  { name: "Monterrey", x: 419, y: 187, anchor: "start" as const, labelDy: -10 },
+  { name: "CDMX", x: 443, y: 349, anchor: "start" as const, labelDy: -10 },
+  { name: "Cancun", x: 680, y: 305, anchor: "end" as const, labelDy: -10 },
+  { name: "Oaxaca", x: 489, y: 410, anchor: "middle" as const, labelDy: -10 },
 ];
 
 const routes = [
-  { d: "M330,615 Q220,430 96,315", dur: "3.2s" },
-  { d: "M330,615 Q430,420 495,398", dur: "2.6s" },
-  { d: "M330,615 Q400,650 452,668", dur: "2.0s" },
-  { d: "M330,615 Q560,500 805,598", dur: "3.8s" },
-  { d: "M330,615 Q400,705 478,766", dur: "2.9s" },
+  { d: "M362,317 Q185,203 100,11", dur: "3.2s" },
+  { d: "M362,317 Q371,244 419,187", dur: "2.6s" },
+  { d: "M362,317 Q407,321 443,349", dur: "2.0s" },
+  { d: "M362,317 Q519,263 680,305", dur: "3.8s" },
+  { d: "M362,317 Q439,345 489,410", dur: "2.9s" },
 ];
 
 const perks = [
@@ -63,31 +71,31 @@ export function MexicoShipping() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/mexico.png" alt="Mapa de Mexico" className="w-full" />
               <svg
-                viewBox="0 0 857 1109"
+                viewBox="0 0 693 500"
                 className="absolute inset-0 h-full w-full"
                 role="img"
                 aria-label="Rutas de envio en Mexico"
               >
                 {routes.map((r, i) => (
                   <g key={i}>
-                    <path d={r.d} fill="none" stroke="#9B1B7D" strokeWidth="3" opacity="0.25" />
+                    <path d={r.d} fill="none" stroke="#9B1B7D" strokeWidth="2.5" opacity="0.25" />
                     <path
                       d={r.d}
                       fill="none"
                       stroke="#9B1B7D"
-                      strokeWidth="3"
+                      strokeWidth="2.5"
                       strokeLinecap="round"
-                      strokeDasharray="6 14"
+                      strokeDasharray="5 11"
                     >
                       <animate
                         attributeName="stroke-dashoffset"
                         from="0"
-                        to="-40"
+                        to="-32"
                         dur="0.9s"
                         repeatCount="indefinite"
                       />
                     </path>
-                    <circle r="6" fill="#9B1B7D">
+                    <circle r="5" fill="#9B1B7D">
                       <animateMotion dur={r.dur} repeatCount="indefinite" path={r.d} />
                       <animate
                         attributeName="opacity"
@@ -101,13 +109,13 @@ export function MexicoShipping() {
 
                 {cities.map((c) => (
                   <g key={c.name}>
-                    <circle cx={c.x} cy={c.y} r="5.5" fill="#101846" />
+                    <circle cx={c.x} cy={c.y} r="4.5" fill="#101846" />
                     <text
-                      x={c.anchor === "end" ? c.x - 8 : c.anchor === "start" ? c.x + 8 : c.x}
-                      y={c.y - 10}
+                      x={c.anchor === "end" ? c.x - 7 : c.anchor === "start" ? c.x + 7 : c.x}
+                      y={c.y + c.labelDy}
                       textAnchor={c.anchor}
                       className="fill-navy"
-                      fontSize="17"
+                      fontSize="14"
                       fontWeight="700"
                     >
                       {c.name}
@@ -116,16 +124,16 @@ export function MexicoShipping() {
                 ))}
 
                 {/* Hub Guadalajara */}
-                <circle cx={HUB.x} cy={HUB.y} r="16" fill="#9B1B7D" opacity="0.2">
-                  <animate attributeName="r" values="14;26;14" dur="2.2s" repeatCount="indefinite" />
+                <circle cx={HUB.x} cy={HUB.y} r="13" fill="#9B1B7D" opacity="0.2">
+                  <animate attributeName="r" values="11;21;11" dur="2.2s" repeatCount="indefinite" />
                 </circle>
-                <circle cx={HUB.x} cy={HUB.y} r="9" fill="#9B1B7D" stroke="#fff" strokeWidth="2.5" />
+                <circle cx={HUB.x} cy={HUB.y} r="7.5" fill="#9B1B7D" stroke="#fff" strokeWidth="2" />
                 <text
-                  x={HUB.x - 6}
-                  y={HUB.y + 26}
+                  x={HUB.x - 5}
+                  y={HUB.y + 21}
                   textAnchor="end"
                   className="fill-magenta"
-                  fontSize="18"
+                  fontSize="15"
                   fontWeight="800"
                 >
                   Guadalajara

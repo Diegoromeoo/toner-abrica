@@ -32,11 +32,6 @@ export function CountUp({
         entries.forEach((e) => {
           if (e.isIntersecting && !started.current) {
             started.current = true;
-            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-              setValue(end);
-              obs.unobserve(e.target);
-              return;
-            }
             const start = performance.now();
             const tick = (now: number) => {
               const p = Math.min((now - start) / duration, 1);

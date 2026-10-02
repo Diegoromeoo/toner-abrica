@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { WhatsAppIcon, ArrowRightIcon, MailIcon } from "./icons";
 import { whatsappUrl, site, hasContact } from "@/lib/site";
 import { Reveal } from "./Reveal";
@@ -9,10 +9,9 @@ import { Magnetic } from "./Magnetic";
 
 export function CTASection() {
   const ref = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const floatA = useTransform(scrollYProgress, [0, 1], [reduced ? 0 : -24, reduced ? 0 : 24]);
-  const floatB = useTransform(scrollYProgress, [0, 1], [reduced ? 0 : 20, reduced ? 0 : -20]);
+  const floatA = useTransform(scrollYProgress, [0, 1], [-24, 24]);
+  const floatB = useTransform(scrollYProgress, [0, 1], [20, -20]);
   // Igual que en Hero: el scroll inicial del target no se conoce hasta montar,
   // asi que arrancamos en 0 (coincide con el servidor) y activamos el parallax despues.
   const [mounted, setMounted] = useState(false);

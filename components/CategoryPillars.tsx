@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { pillars } from "@/lib/catalog";
 import { InsumosIcon, GranFormatoIcon, PapeleriaIcon, HardwareIcon, ArrowRightIcon } from "./icons";
 import { Reveal } from "./Reveal";
@@ -21,19 +21,18 @@ const accentRing: Record<string, string> = {
 };
 
 export function CategoryPillars() {
-  const reduced = useReducedMotion();
   return (
     <section id="pilares" className="scroll-mt-28 relative overflow-hidden bg-base-gray py-16 sm:py-20">
       <motion.div
         aria-hidden
         className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-magenta/[0.07] blur-3xl"
-        animate={reduced ? undefined : { x: [0, -16, 0], y: [0, 18, 0] }}
+        animate={{ x: [0, -16, 0], y: [0, 18, 0] }}
         transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         aria-hidden
         className="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-periwinkle/[0.06] blur-3xl"
-        animate={reduced ? undefined : { x: [0, 20, 0], y: [0, -14, 0] }}
+        animate={{ x: [0, 20, 0], y: [0, -14, 0] }}
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
       />
       <div className="container-ta relative">

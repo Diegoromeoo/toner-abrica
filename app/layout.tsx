@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins, Inter } from "next/font/google";
+import { MotionConfig } from "motion/react";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -50,11 +51,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${poppins.variable} ${inter.variable}`}>
       <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <WhatsAppButton />
-        <CookieConsent />
+        {/* "never": las animaciones se muestran siempre, aunque el sistema del
+            visitante pida reducir movimiento (decision explicita del cliente). */}
+        <MotionConfig reducedMotion="never">
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <WhatsAppButton />
+          <CookieConsent />
+        </MotionConfig>
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode, type PointerEvent } from "react";
-import { motion, useMotionValue, useSpring, useReducedMotion } from "motion/react";
+import { motion, useMotionValue, useSpring } from "motion/react";
 
 interface MagneticProps {
   children: ReactNode;
@@ -14,13 +14,13 @@ interface MagneticProps {
 
 /**
  * Envoltorio "magnetico": el contenido sigue ligeramente al cursor dentro de su
- * propia area. Solo en mouse (se ignora en touch) y se desactiva por completo
- * si el visitante prefiere menos movimiento. El desplazamiento esta acotado
- * para que nunca produzca scroll horizontal.
+ * propia area. Solo en mouse (se ignora en touch). El desplazamiento esta
+ * acotado para que nunca produzca scroll horizontal. Se muestra siempre,
+ * incluso si el sistema del visitante pide "reducir movimiento" — decision
+ * explicita del cliente para este sitio.
  */
 export function Magnetic({ children, className = "", strength = 0.3, max = 12 }: MagneticProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 220, damping: 18, mass: 0.4 });
@@ -29,7 +29,7 @@ export function Magnetic({ children, className = "", strength = 0.3, max = 12 }:
   const clamp = (v: number) => Math.max(-max, Math.min(max, v));
 
   function onMove(e: PointerEvent<HTMLDivElement>) {
-    if (reduced || e.pointerType !== "mouse" || !ref.current) return;
+    if (e.pointerType !== "mouse" || !ref.current) return;
     const r = ref.current.getBoundingClientRect();
     x.set(clamp((e.clientX - r.left - r.width / 2) * strength));
     y.set(clamp((e.clientY - r.top - r.height / 2) * strength));
