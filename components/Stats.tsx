@@ -1,3 +1,6 @@
+"use client";
+
+import { motion, useReducedMotion } from "motion/react";
 import { CountUp } from "./CountUp";
 import { Reveal } from "./Reveal";
 
@@ -17,11 +20,17 @@ const stats: Stat[] = [
 ];
 
 export function Stats() {
+  const reduced = useReducedMotion();
   return (
     <section className="relative overflow-hidden bg-navy py-16 sm:py-20">
       {/* Textura sutil */}
       <div className="pointer-events-none absolute inset-0 bg-dots opacity-[0.15]" />
-      <div className="pointer-events-none absolute -right-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-magenta/20 blur-3xl" />
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -right-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-magenta/20 blur-3xl"
+        animate={reduced ? undefined : { x: [0, -18, 0], scale: [1, 1.08, 1] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       <div className="container-ta relative">
         <Reveal className="mx-auto max-w-2xl text-center">

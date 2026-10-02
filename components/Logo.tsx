@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 
 interface LogoProps {
   showSubtitle?: boolean;
@@ -9,14 +12,17 @@ interface LogoProps {
 export function Logo({ showSubtitle = false, variant = "color", className = "" }: LogoProps) {
   const abricaColor = variant === "light" ? "text-white" : "text-navy";
   const subColor = variant === "light" ? "text-cyan-200" : "text-periwinkle";
+  const reduced = useReducedMotion();
 
   return (
     <Link href="/" className={`group inline-flex items-center gap-2.5 ${className}`}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      {/* El globo "flota" todo el tiempo, como un globo aerostatico de verdad */}
+      <motion.img
         src="/globo.png"
         alt="Toner Abrica"
         className="h-10 w-auto shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5"
+        animate={reduced ? undefined : { y: [0, -4, 0] }}
+        transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
       />
       <span className="flex flex-col leading-none">
         <span className="font-display text-xl font-extrabold tracking-tight sm:text-2xl">

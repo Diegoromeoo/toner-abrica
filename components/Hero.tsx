@@ -41,9 +41,13 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 bg-cover bg-right bg-no-repeat"
         initial={false}
       >
-        <div
+        {/* Zoom lento y continuo (efecto Ken Burns): siempre hay algo moviendose,
+            incluso sin hacer scroll ni mover el cursor. */}
+        <motion.div
           className="absolute inset-0 bg-cover bg-right bg-no-repeat"
-          style={{ backgroundImage: "url('/hero-sky.jpg')", filter: "blur(14px)", transform: "scale(1.12)" }}
+          style={{ backgroundImage: "url('/hero-sky.jpg')", filter: "blur(14px)" }}
+          animate={reduced ? { scale: 1.12 } : { scale: [1.12, 1.22, 1.12] }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
         />
       </motion.div>
       {/* Velo para legibilidad del texto a la izquierda (mas fuerte y amplio) */}
