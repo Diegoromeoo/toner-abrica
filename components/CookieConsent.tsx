@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { CookieIcon } from "./icons";
 
 const STORAGE_KEY = "ta-cookie-consent";
@@ -47,7 +48,11 @@ export function CookieConsent() {
           <h2 className="text-sm font-bold text-navy">Usamos cookies</h2>
           <p className="mt-1 text-sm text-periwinkle">
             Usamos cookies propias y de terceros para mejorar tu experiencia y medir el uso del sitio. Puedes
-            aceptarlas o declinarlas cuando quieras.
+            aceptarlas o declinarlas cuando quieras.{" "}
+            <Link href="/aviso-de-privacidad" className="font-semibold text-magenta underline underline-offset-2">
+              Mas informacion
+            </Link>
+            .
           </p>
           <div className="mt-4 flex flex-wrap gap-2.5">
             <button type="button" onClick={() => choose("accepted")} className="btn-primary px-5 py-2.5 text-xs">

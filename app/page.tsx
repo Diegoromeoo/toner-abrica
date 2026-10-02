@@ -7,6 +7,7 @@ import { MexicoShipping } from "@/components/MexicoShipping";
 import { Team } from "@/components/Team";
 import { Stats } from "@/components/Stats";
 import { CTASection } from "@/components/CTASection";
+import { LocationMap } from "@/components/LocationMap";
 
 export default function HomePage() {
   return (
@@ -20,6 +21,7 @@ export default function HomePage() {
       <Team />
       <Stats />
       <CTASection />
+      <LocationMap />
     </>
   );
 }

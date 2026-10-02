@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "motion/react";
 import { team } from "@/lib/team";
 import { Reveal } from "./Reveal";
 
@@ -24,21 +27,27 @@ export function Team() {
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {team.map((m, i) => (
-            <Reveal
+            <motion.div
               key={m.name}
-              delay={i * 100}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.65, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -8, rotate: i % 2 === 0 ? -1.5 : 1.5 }}
               className="card-soft flex flex-col items-center p-6 text-center"
             >
               {/* Avatar placeholder (foto pendiente) */}
-              <div
+              <motion.div
+                whileHover={{ scale: 1.08 }}
+                transition={{ type: "spring", stiffness: 300, damping: 14 }}
                 className={`flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br ${avatarBg[m.accent]} text-2xl font-extrabold text-white shadow-soft ring-4 ring-white`}
               >
                 {m.initials}
-              </div>
+              </motion.div>
               <h3 className="mt-4 text-lg font-bold text-navy">{m.name}</h3>
               <p className="mt-0.5 text-sm font-semibold text-magenta">{m.role}</p>
               <p className="mt-3 text-sm text-periwinkle">{m.bio}</p>
-            </Reveal>
+            </motion.div>
           ))}
         </div>
       </div>

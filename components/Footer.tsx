@@ -5,7 +5,7 @@ import { WhatsAppIcon, LocationIcon, TruckIcon, ArrowRightIcon } from "./icons";
 
 export function Footer() {
   return (
-    <footer id="contacto" className="relative scroll-mt-24 overflow-hidden bg-navy text-cyan-100/90">
+    <footer className="relative overflow-hidden bg-navy text-cyan-100/90">
       {/* Textura armonica */}
       <div className="pointer-events-none absolute inset-0 bg-dots opacity-[0.12]" />
       <div className="pointer-events-none absolute -top-24 left-1/2 h-56 w-[42rem] -translate-x-1/2 rounded-full bg-magenta/15 blur-3xl" />
@@ -73,7 +73,12 @@ export function Footer() {
           <p>
             &copy; {new Date().getFullYear()} {site.name} — {site.owner}.
           </p>
-          <p>Hecho en {site.city}.</p>
+          <div className="flex items-center gap-4">
+            <Link href="/aviso-de-privacidad" className="transition hover:text-cyan-300">
+              Aviso de privacidad y cookies
+            </Link>
+            <p>Hecho en {site.city}.</p>
+          </div>
         </div>
       </div>
     </footer>

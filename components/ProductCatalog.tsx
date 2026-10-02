@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { motion } from "motion/react";
 import { products, categories, type CategoryKey } from "@/lib/catalog";
 import { ProductCard } from "./ProductCard";
 import { SearchIcon, CloseIcon } from "./icons";
@@ -141,12 +142,19 @@ function FilterChip({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
+      className={`relative isolate rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
         active
-          ? "border-magenta bg-magenta text-white shadow-cta"
+          ? "border-magenta text-white"
           : "border-periwinkle-200 bg-white text-navy hover:border-magenta-300 hover:text-magenta"
       }`}
     >
+      {active && (
+        <motion.span
+          layoutId="catalog-filter-pill"
+          className="absolute inset-0 -z-10 rounded-full bg-magenta shadow-cta"
+          transition={{ type: "spring", stiffness: 350, damping: 30 }}
+        />
+      )}
       {children}
     </button>
   );
