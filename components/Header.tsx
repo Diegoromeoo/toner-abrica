@@ -2,15 +2,30 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { motion, useScroll, useTransform } from "motion/react";
 import { Logo } from "./Logo";
 import { MenuIcon, CloseIcon, WhatsAppIcon } from "./icons";
 import { navLinks, whatsappUrl } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const { scrollY, scrollYProgress } = useScroll();
+  const elevatedShadow = useTransform(scrollY, [0, 60], [0, 1]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-periwinkle-100 bg-white/95 shadow-header backdrop-blur">
+      {/* Sombra que se intensifica al bajar: sensacion de "elevacion" progresiva */}
+      <motion.div
+        aria-hidden
+        style={{ opacity: elevatedShadow }}
+        className="pointer-events-none absolute inset-x-0 top-full h-6 bg-gradient-to-b from-navy/10 to-transparent"
+      />
+      {/* Barra de progreso de lectura: se llena segun cuanto has bajado en la pagina */}
+      <motion.div
+        aria-hidden
+        style={{ scaleX: scrollYProgress }}
+        className="absolute inset-x-0 top-0 h-[3px] origin-left bg-gradient-to-r from-magenta via-magenta-400 to-cyan-400"
+      />
       <div className="container-ta">
         {/* Fila 1: logo + buscador + CTA */}
         <div className="flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
