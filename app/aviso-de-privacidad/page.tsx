@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site, whatsappUrl } from "@/lib/site";
+import { CookieSettingsButton } from "@/components/CookieSettingsButton";
 
 export const metadata: Metadata = {
   title: "Aviso de privacidad y cookies",
@@ -49,19 +50,48 @@ export default function PrivacyPage() {
           </div>
 
           <div>
-            <h2 className="text-lg font-bold text-navy">4. Cookies y almacenamiento local</h2>
+            <h2 className="text-lg font-bold text-navy">4. Cookies</h2>
             <p className="mt-2 text-periwinkle">
-              Este sitio usa el almacenamiento local de tu navegador (localStorage) para recordar
-              una sola cosa: si aceptaste o declinaste el aviso de cookies, bajo la llave{" "}
-              <code className="rounded bg-base-gray px-1.5 py-0.5 text-xs">ta-cookie-consent</code>.
-              Ese dato vive unicamente en tu dispositivo, no se envia a ningun servidor, y puedes
-              borrarlo en cualquier momento desde la configuracion de tu navegador.
+              Una cookie es un archivo pequeno que el sitio guarda en tu navegador. Estas son las
+              que existen hoy en este sitio:
             </p>
-            <p className="mt-2 text-periwinkle">
-              Si en el futuro incorporamos cookies de analitica o publicidad de terceros,
-              actualizaremos este aviso y el banner de cookies antes de activarlas, para que puedas
-              aceptarlas o declinarlas.
+            <div className="mt-3 overflow-x-auto rounded-xl border border-periwinkle-100">
+              <table className="w-full min-w-[32rem] text-left text-xs sm:text-sm">
+                <thead className="bg-base-gray text-navy">
+                  <tr>
+                    <th className="px-3 py-2 font-semibold">Cookie</th>
+                    <th className="px-3 py-2 font-semibold">Tipo</th>
+                    <th className="px-3 py-2 font-semibold">Para que sirve</th>
+                    <th className="px-3 py-2 font-semibold">Duracion</th>
+                  </tr>
+                </thead>
+                <tbody className="text-periwinkle">
+                  <tr className="border-t border-periwinkle-100">
+                    <td className="px-3 py-2">
+                      <code className="rounded bg-base-gray px-1.5 py-0.5 text-xs">ta-cookie-consent</code>
+                    </td>
+                    <td className="px-3 py-2">Necesaria (propia)</td>
+                    <td className="px-3 py-2">Recuerda si aceptaste o rechazaste las cookies de terceros.</td>
+                    <td className="px-3 py-2">180 dias</td>
+                  </tr>
+                  <tr className="border-t border-periwinkle-100">
+                    <td className="px-3 py-2">Cookies de Google</td>
+                    <td className="px-3 py-2">Terceros</td>
+                    <td className="px-3 py-2">
+                      Las puede colocar Google al mostrar el mapa de ubicacion. Solo se cargan si las
+                      permites o si pulsas &ldquo;Cargar mapa&rdquo;.
+                    </td>
+                    <td className="px-3 py-2">Segun Google</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-3 text-periwinkle">
+              No usamos cookies de analitica ni de publicidad. Si en el futuro las incorporamos,
+              actualizaremos este aviso y el banner antes de activarlas, para que puedas aceptarlas o
+              rechazarlas. Puedes cambiar tu eleccion cuando quieras:
             </p>
+            <CookieSettingsButton className="btn-secondary mt-3 px-5 py-2.5 text-xs" />
           </div>
 
           <div>

@@ -18,6 +18,13 @@ export const team: TeamMember[] = [
     accent: "magenta",
   },
   {
+    name: "Luis Abraham Abrica",
+    role: "Subdirector General",
+    bio: "Segundo al mando de la empresa; coordina la operacion diaria y respalda a la direccion en la atencion a clientes.",
+    initials: "LA",
+    accent: "cyan",
+  },
+  {
     name: "Mariana Torres",
     role: "Gerente de Ventas B2B",
     bio: "Disena esquemas de mayoreo y convenios corporativos a la medida de cada cliente.",

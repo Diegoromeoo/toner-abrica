@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
+import { CookieSettingsButton } from "./CookieSettingsButton";
 import { site, navLinks, whatsappUrl, hasContact, socials } from "@/lib/site";
 import { WhatsAppIcon, LocationIcon, TruckIcon, ArrowRightIcon } from "./icons";
 
@@ -73,10 +74,11 @@ export function Footer() {
           <p>
             &copy; {new Date().getFullYear()} {site.name} — {site.owner}.
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
             <Link href="/aviso-de-privacidad" className="transition hover:text-cyan-300">
               Aviso de privacidad y cookies
             </Link>
+            <CookieSettingsButton className="transition hover:text-cyan-300" />
             <p>Hecho en {site.city}.</p>
           </div>
         </div>

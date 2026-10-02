@@ -3,33 +3,40 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { site } from "@/lib/site";
+import { useConsent } from "@/lib/cookie-consent";
 import { LocationIcon } from "./icons";
 import { Reveal } from "./Reveal";
+import { CookieSettingsButton } from "./CookieSettingsButton";
 
 type LocationKey = "local" | "taller";
 
-const mapsQuery = (address: string) =>
-  `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
+const mapsEmbed = (query: string) => `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`;
+const mapsLink = (query: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 
-const views: Record<LocationKey, { label: string; address: string; mapQuery: string }> = {
+const localQuery = `${site.locations.local.street}, ${site.locations.local.neighborhood}, ${site.locations.local.postalCode} ${site.locations.local.city}, Mexico`;
+const tallerQuery = `${site.locations.taller.street}, ${site.locations.taller.postalCode} ${site.locations.taller.city}, Mexico`;
+
+const views: Record<LocationKey, { label: string; address: string; embed: string; link: string }> = {
   local: {
     label: site.locations.local.label,
     address: `${site.locations.local.street}, ${site.locations.local.neighborhood}, C.P. ${site.locations.local.postalCode}, ${site.locations.local.city}`,
-    mapQuery: mapsQuery(
-      `${site.locations.local.street}, ${site.locations.local.neighborhood}, ${site.locations.local.postalCode} ${site.locations.local.city}, Mexico`
-    ),
+    embed: mapsEmbed(localQuery),
+    link: mapsLink(localQuery),
   },
   taller: {
     label: site.locations.taller.label,
     address: `${site.locations.taller.street}, C.P. ${site.locations.taller.postalCode}, ${site.locations.taller.city}`,
-    mapQuery: mapsQuery(
-      `${site.locations.taller.street}, ${site.locations.taller.postalCode} ${site.locations.taller.city}, Mexico`
-    ),
+    embed: mapsEmbed(tallerQuery),
+    link: mapsLink(tallerQuery),
   },
 };
 
 export function LocationMap() {
   const [active, setActive] = useState<LocationKey>("local");
+  const [loadOnce, setLoadOnce] = useState(false);
+  const consent = useConsent();
+  const showMap = consent === "all" || loadOnce;
   const current = views[active];
 
   return (
@@ -87,21 +94,45 @@ export function LocationMap() {
             </div>
 
             <div className="relative mt-3 overflow-hidden rounded-2xl border border-periwinkle-100 shadow-soft">
-              <AnimatePresence mode="wait">
-                <motion.iframe
-                  key={active}
-                  src={current.mapQuery}
-                  title={`Mapa de ${current.label} — Toner Abrica`}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="h-80 w-full sm:h-96"
-                  style={{ border: 0 }}
-                />
-              </AnimatePresence>
+              {showMap ? (
+                <AnimatePresence mode="wait">
+                  <motion.iframe
+                    key={active}
+                    src={current.embed}
+                    title={`Mapa de ${current.label} — Toner Abrica`}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="h-80 w-full sm:h-96"
+                    style={{ border: 0 }}
+                  />
+                </AnimatePresence>
+              ) : (
+                <div className="flex h-80 flex-col items-center justify-center gap-4 bg-white px-6 text-center sm:h-96">
+                  <LocationIcon className="h-8 w-8 text-magenta" />
+                  <p className="max-w-sm text-sm text-periwinkle">
+                    El mapa lo muestra Google y puede colocar sus propias cookies. Cargalo solo si quieres, o
+                    permite el contenido de terceros en tus preferencias.
+                  </p>
+                  <div className="flex flex-wrap items-center justify-center gap-2.5">
+                    <button type="button" onClick={() => setLoadOnce(true)} className="btn-primary px-5 py-2.5 text-xs">
+                      Cargar mapa
+                    </button>
+                    <a
+                      href={current.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-secondary px-5 py-2.5 text-xs"
+                    >
+                      Abrir en Google Maps
+                    </a>
+                  </div>
+                  <CookieSettingsButton className="text-xs font-semibold text-periwinkle underline underline-offset-2 transition-colors hover:text-magenta" />
+                </div>
+              )}
             </div>
           </div>
         </Reveal>
